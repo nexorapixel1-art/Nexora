@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nexora | Mobile App &amp; Web Engineering Studio</title>
+<meta name="description" content="Nexora is a small digital studio that designs and builds web apps and websites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['"Plus Jakarta Sans"','system-ui','sans-serif'],mono:['"JetBrains Mono"','ui-monospace','monospace']}}}}</script>
+<style>
+:root{--bg:#09090B;--line:#27272A;--ind:#6366F1;--cy:#06B6D4;--tx:#FAFAFA;--mu:#A1A1AA;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(88px + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--tx);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(9,9,11,.85);backdrop-filter:blur(14px);z-index:60}
+.glass{background:rgba(24,24,27,.55);border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.grad{background:linear-gradient(135deg,var(--ind),var(--cy))}
+.gtext{background:linear-gradient(135deg,#818CF8,#22D3EE);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mono{font-family:'JetBrains Mono',monospace}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#C7D2FE;border:1px solid var(--line);background:rgba(99,102,241,.1);padding:2px 8px;border-radius:6px}
+.card{transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-4px);border-color:#4F46E5;box-shadow:0 20px 50px -20px rgba(99,102,241,.45)}
+.card:hover .pv{transform:scale(1.05)}
+.pv{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;border-radius:10px;padding:12px 20px;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}
+.btn:hover{transform:translateY(-1px)}
+.btn-p{background:linear-gradient(135deg,var(--ind),var(--cy));color:#fff;box-shadow:0 8px 30px -8px rgba(99,102,241,.7)}
+.btn-g{border:1px solid var(--line);background:rgba(24,24,27,.6);color:var(--tx)}
+.btn-g:hover{border-color:#52525B}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px;border-radius:6px}
+.fld{width:100%;background:#0F0F12;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--tx);font:inherit;transition:border-color .2s,box-shadow .2s}
+.fld:focus{outline:none;border-color:var(--ind);box-shadow:0 0 0 3px rgba(99,102,241,.25)}
+.fld option{background:#18181B}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.stage{perspective:1200px}
+.tilt{transition:transform .15s ease-out;transform-style:preserve-3d}
+.gridbg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);opacity:.35}
+.cursor{display:inline-block;width:7px;height:14px;background:var(--cy);vertical-align:-2px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+@keyframes fl{50%{transform:translateY(-10px)}}
+.float{animation:fl 6s ease-in-out infinite}
+.fbtn[aria-pressed=true]{background:#fff;color:#09090B;border-color:#fff}
+dialog{background:#0F0F12;color:var(--tx);border:1px solid var(--line);border-radius:18px;max-width:640px;width:calc(100% - 32px);padding:0;margin:auto}
+dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
+dialog[open]{animation:pop .3s cubic-bezier(.2,.7,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="min-h-screen">
+
+<header class="fixed top-0 inset-x-0 z-50" style="padding-top:env(safe-area-inset-top,0px)">
+  <nav class="glass mx-auto mt-3 flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 md:px-6" style="width:calc(100% - 24px)" aria-label="Primary">
+    <a href="#top" class="text-lg font-extrabold tracking-[.22em]" aria-label="Nexora home">NEXORA<span class="gtext">.</span></a>
+    <ul class="hidden items-center gap-8 text-sm font-medium text-zinc-400 md:flex">
+      <li><a class="hover:text-white transition" href="#work">Work</a></li>
+      <li><a class="hover:text-white transition" href="#services">Services</a></li>
+      <li><a class="hover:text-white transition" href="#process">Process</a></li>
+      <li><a class="hover:text-white transition" href="#about">About</a></li>
+    </ul>
+    <div class="flex items-center gap-2">
+      <a href="#contact" class="btn btn-p !py-2 !px-4 text-sm">Start a Project</a>
+      <button id="burger" class="btn btn-g !p-2 md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mob">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div id="mob" class="glass mx-auto mt-2 hidden max-w-6xl rounded-2xl p-4 md:hidden" style="width:calc(100% - 24px)">
+    <ul class="grid gap-1 text-zinc-300">
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-white/5" href="#work">Work</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-white/5" href="#services">Services</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-white/5" href="#process">Process</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-white/5" href="#about">About</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="relative overflow-hidden px-5 pb-20 pt-36 md:pt-44">
+  <div class="gridbg absolute inset-0"></div>
+  <div class="orb -left-24 top-10 h-80 w-80 bg-indigo-600/30"></div>
+  <div class="orb -right-20 top-40 h-80 w-80 bg-cyan-500/20"></div>
+  <div class="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
+    <div>
+      <p class="mono mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-xs text-zinc-400"><span class="h-2 w-2 rounded-full bg-emerald-400"></span>Booking projects for Q1 2027</p>
+      <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">Engineering Next-Gen Apps &amp; <span class="gtext">Web Experiences.</span></h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-zinc-400">Nexora is a small digital studio that designs and builds web apps and websites.</p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#contact" class="btn btn-p">Book a Discovery Call</a>
+        <a href="#work" class="btn btn-g">View Our Work</a>
+      </div>
+      <dl class="mono mt-12 grid max-w-md grid-cols-3 gap-6 text-sm">
+        <div><dd class="text-2xl font-semibold text-white" data-count="5">0</dd><dt class="text-zinc-500">live demos</dt></div>
+        <div><dd class="text-2xl font-semibold text-white" data-count="3">0</dd><dt class="text-zinc-500">web apps</dt></div>
+        <div><dd class="text-2xl font-semibold text-white" data-count="2">0</dd><dt class="text-zinc-500">websites</dt></div>
+      </dl>
+    </div>
+    <div class="stage relative mx-auto w-full max-w-md" id="stage" aria-hidden="true">
+      <div class="tilt relative" id="tilt">
+        <div class="glass rounded-2xl p-0 shadow-2xl shadow-indigo-900/30">
+          <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3"><i class="h-2.5 w-2.5 rounded-full bg-zinc-700"></i><i class="h-2.5 w-2.5 rounded-full bg-zinc-700"></i><i class="h-2.5 w-2.5 rounded-full bg-zinc-700"></i><span class="mono ml-3 text-xs text-zinc-500">app/checkout.tsx</span></div>
+          <pre class="mono overflow-hidden p-5 text-[12.5px] leading-6 text-zinc-300"><code><span class="text-indigo-400">export async function</span> <span class="text-cyan-300">ship</span>(idea) {
+  <span class="text-indigo-400">const</span> design = <span class="text-indigo-400">await</span> prototype(idea);
+  <span class="text-indigo-400">const</span> build&nbsp;&nbsp;= <span class="text-indigo-400">await</span> sprint(design);
+  <span class="text-indigo-400">return</span> deploy(build, {
+    <span class="text-zinc-500">// fast by default</span>
+    region: <span class="text-emerald-300">"edge"</span>,
+    ready: <span class="text-amber-300">true</span>,
+  });<span class="cursor"></span>
+}</code></pre>
+        </div>
+        <div class="glass float absolute -bottom-10 -right-2 w-36 rounded-[26px] p-2 sm:-right-8" style="transform:translateZ(60px)">
+          <div class="rounded-[20px] bg-[#0F0F12] p-3">
+            <div class="mx-auto mb-3 h-1 w-10 rounded bg-zinc-700"></div>
+            <p class="mono text-[10px] text-zinc-500">Balance</p>
+            <p class="text-lg font-bold">$12,480</p>
+            <svg viewBox="0 0 100 40" class="mt-2 w-full"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs><path d="M0 32 L16 26 L32 29 L50 14 L68 18 L84 6 L100 9" fill="none" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <div class="mt-2 grid grid-cols-2 gap-1.5"><i class="h-6 rounded grad opacity-80"></i><i class="h-6 rounded bg-zinc-800"></i></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="px-5 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="rv mb-12 max-w-2xl"><h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Everything you need to launch and grow.</h2><p class="mt-4 text-zinc-400">Design, engineering and deployment handled in one place, with fewer handoffs.</p></div>
+    <div class="grid gap-4 md:grid-cols-6">
+      <article class="rv glass card relative overflow-hidden rounded-2xl p-7 md:col-span-4">
+        <div class="orb -right-10 -top-10 h-48 w-48 bg-indigo-600/25"></div>
+        <svg class="relative text-indigo-400" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
+        <h3 class="relative mt-5 text-xl font-bold">Web Development</h3>
+        <p class="relative mt-2 max-w-md text-zinc-400">Full-stack web apps, SaaS platforms and high-converting marketing sites built on the Next.js and React ecosystem.</p>
+        <div class="relative mt-5 flex flex-wrap gap-2"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span></div>
+      </article>
+      <article class="rv glass card rounded-2xl p-7 md:col-span-2">
+        <svg class="text-cyan-400" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+        <h3 class="mt-5 text-xl font-bold">Mobile App Development</h3>
+        <p class="mt-2 text-zinc-400">Cross-platform iOS and Android apps with React Native or Flutter, taken on per project. There are no mobile apps in the portfolio yet.</p>
+        <div class="mt-5 flex flex-wrap gap-2"><span class="tag">React Native</span><span class="tag">Flutter</span></div>
+      </article>
+      <article class="rv glass card rounded-2xl p-7 md:col-span-2">
+        <svg class="text-indigo-400" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a4 4 0 0 0 4-4c0-4-4-8-9-8Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="11" cy="7.5" r="1"/><circle cx="16" cy="8.5" r="1"/></svg>
+        <h3 class="mt-5 text-xl font-bold">UI/UX &amp; Product Design</h3>
+        <p class="mt-2 text-zinc-400">Wireframing, interactive prototyping, design systems and brand identity.</p>
+        <div class="mt-5 flex flex-wrap gap-2"><span class="tag">Figma</span><span class="tag">Design systems</span></div>
+      </article>
+      <article class="rv glass card relative overflow-hidden rounded-2xl p-7 md:col-span-4">
+        <div class="orb -bottom-16 right-0 h-48 w-48 bg-cyan-500/20"></div>
+        <svg class="relative text-cyan-400" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+        <h3 class="relative mt-5 text-xl font-bold">Performance &amp; Scaling</h3>
+        <p class="relative mt-2 max-w-md text-zinc-400">Cloud setup, API integrations, SEO and speed optimization.</p>
+        <div class="relative mt-5 flex flex-wrap gap-2"><span class="tag">AWS</span><span class="tag">REST &amp; GraphQL</span><span class="tag">Core Web Vitals</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="px-5 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="rv mb-10 flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-xl"><h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Selected work</h2><p class="mt-4 text-zinc-400">Five live demo projects built to show the kind of products we make. They are demonstrations, not client work.</p></div>
+      <div class="flex gap-2" role="group" aria-label="Filter projects">
+        <button class="fbtn btn btn-g !py-2 !px-4 text-sm" data-f="all" aria-pressed="true">All</button>
+        <button class="fbtn btn btn-g !py-2 !px-4 text-sm" data-f="web" aria-pressed="false">Web Apps</button>
+        <button class="fbtn btn btn-g !py-2 !px-4 text-sm" data-f="site" aria-pressed="false">Websites</button>
+      </div>
+    </div>
+    <div id="grid" class="grid gap-5 md:grid-cols-2"></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="px-5 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="rv mb-12 max-w-2xl"><h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">A clear path from idea to launch.</h2><p class="mt-4 text-zinc-400">Four steps from first conversation to launch.</p></div>
+    <ol class="relative grid gap-5 md:grid-cols-4">
+      <div class="absolute left-[19px] top-0 hidden h-full w-px grad opacity-40 max-md:block md:left-0 md:top-[19px] md:h-px md:w-full"></div>
+      <li class="rv relative pl-12 md:pl-0 md:pt-12"><span class="mono grad absolute left-0 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-semibold text-white">01</span><h3 class="font-bold">Discovery &amp; Strategy</h3><p class="mt-2 text-sm text-zinc-400">Workshops to define goals, users, scope and success metrics.</p></li>
+      <li class="rv relative pl-12 md:pl-0 md:pt-12"><span class="mono grad absolute left-0 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-semibold text-white">02</span><h3 class="font-bold">UI/UX Design</h3><p class="mt-2 text-sm text-zinc-400">Wireframes, clickable prototypes and a reusable design system.</p></li>
+      <li class="rv relative pl-12 md:pl-0 md:pt-12"><span class="mono grad absolute left-0 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-semibold text-white">03</span><h3 class="font-bold">Agile Development</h3><p class="mt-2 text-sm text-zinc-400">Short build cycles, with progress shared for your feedback along the way.</p></li>
+      <li class="rv relative pl-12 md:pl-0 md:pt-12"><span class="mono grad absolute left-0 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-semibold text-white">04</span><h3 class="font-bold">Launch &amp; Scale</h3><p class="mt-2 text-sm text-zinc-400">Deployment, app-store submission where relevant, and follow-up tuning.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="px-5 py-20">
+  <div class="glass rv mx-auto grid max-w-6xl gap-10 rounded-3xl p-8 md:grid-cols-2 md:p-12">
+    <div><h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">A small studio with a high bar.</h2></div>
+    <div class="space-y-4 text-zinc-400"><p>Nexora is a small studio that designs and builds web apps and websites to order.</p><p>You talk directly with whoever is building your product.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="relative px-5 py-24">
+  <div class="orb left-1/2 top-10 h-72 w-72 -translate-x-1/2 bg-indigo-600/20"></div>
+  <div class="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+    <div class="rv">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-5xl">Ready to build something extraordinary?</h2>
+      <p class="mt-5 max-w-md text-zinc-400">Tell us about your idea and we’ll reply by email.</p>
+      <div class="mt-8 space-y-3">
+        <div class="glass flex items-center justify-between gap-3 rounded-xl p-4">
+          <div class="min-w-0"><p class="mono text-xs text-zinc-500">Email</p><a href="mailto:nexorapixel1@gmail.com" class="block truncate font-medium hover:text-cyan-300">nexorapixel1@gmail.com</a></div>
+          <button id="copy" class="btn btn-g !py-2 !px-3 text-sm" aria-live="polite">Copy email</button>
+        </div>
+        <a href="https://github.com/nexorapixel1-art" target="_blank" rel="noopener noreferrer" class="glass card flex items-center justify-between gap-3 rounded-xl p-4">
+          <span class="flex items-center gap-3"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.76 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg><span><span class="block mono text-xs text-zinc-500">GitHub</span><span class="font-medium">github.com/nexorapixel1-art</span></span></span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="rv glass rounded-2xl p-6 md:p-8">
+      <form id="form" class="grid gap-4" novalidate>
+        <div><label class="mb-1.5 block text-sm font-medium" for="n">Name</label><input class="fld" id="n" name="name" autocomplete="name" required placeholder="Jane Cooper"></div>
+        <div><label class="mb-1.5 block text-sm font-medium" for="e">Email</label><input class="fld" id="e" name="email" type="email" autocomplete="email" required placeholder="jane@company.com"></div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div><label class="mb-1.5 block text-sm font-medium" for="t">Project type</label><select class="fld" id="t" name="type"><option>Web Development</option><option>Mobile App</option><option>Both</option><option>UI/UX Design</option></select></div>
+          <div><label class="mb-1.5 block text-sm font-medium" for="b">Budget range</label><select class="fld" id="b" name="budget"><option>Under $10k</option><option>$10k – $25k</option><option>$25k – $50k</option><option>$50k+</option></select></div>
+        </div>
+        <div><label class="mb-1.5 block text-sm font-medium" for="p">Project brief</label><textarea class="fld" id="p" name="brief" rows="4" required placeholder="What are you building, and what does success look like?"></textarea></div>
+        <p id="err" class="hidden text-sm text-rose-400" role="alert">Please fill in your name, a valid email and a short project brief.</p>
+        <p class="text-xs text-zinc-500">This opens your email app with the brief filled in, ready for you to send.</p>
+        <button class="btn btn-p" type="submit">Compose email with brief</button>
+      </form>
+      <div id="ok" class="hidden py-10 text-center" role="status" tabindex="-1">
+        <div class="grad mx-auto mb-5 grid h-14 w-14 place-items-center rounded-full"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="m5 12 5 5 9-10"/></svg></div>
+        <h3 class="text-2xl font-bold">Almost there, <span id="who"></span>.</h3>
+        <p class="mt-2 text-zinc-400">Your email app should have opened with your brief filled in. Press Send there to deliver it. Nothing has been sent yet.</p>
+        <p class="mt-3 text-sm text-zinc-500">Nothing opened? <a id="mlink" class="text-cyan-300 underline" href="mailto:nexorapixel1@gmail.com">Try again</a>, or write to nexorapixel1@gmail.com directly.</p>
+        <button id="again" class="btn btn-g mt-6 text-sm">Edit brief</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-zinc-800 px-5 py-12">
+  <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1.5fr_1fr_1fr]">
+    <div><p class="text-lg font-extrabold tracking-[.22em]">NEXORA<span class="gtext">.</span></p><p class="mt-3 max-w-xs text-sm text-zinc-400">Web apps and websites, designed and built to order.</p></div>
+    <nav aria-label="Footer"><ul class="grid gap-2 text-sm text-zinc-400"><li><a class="hover:text-white" href="#work">Work</a></li><li><a class="hover:text-white" href="#services">Services</a></li><li><a class="hover:text-white" href="#process">Process</a></li><li><a class="hover:text-white" href="#about">About</a></li></ul></nav>
+    <ul class="grid content-start gap-2 text-sm text-zinc-400"><li><a class="hover:text-white" href="mailto:nexorapixel1@gmail.com">nexorapixel1@gmail.com</a></li><li><a class="hover:text-white" href="https://github.com/nexorapixel1-art" target="_blank" rel="noopener noreferrer">GitHub profile</a></li></ul>
+  </div>
+  <p class="mx-auto mt-10 max-w-6xl text-xs text-zinc-500">© 2026 Nexora Studio. All rights reserved.</p>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dt"><div id="dc"></div></dialog>
+
+<script>
+const P=[
+{id:5,k:'web',u:'https://claude.ai/artifact/CYU3ezZESt1jPcYwVsyR3c',t:'PulseDesk',o:'Tasks, projects and time tracking in one workspace.',s:['Web App','Task Boards','Time Tracking'],g:'#10B981,#06B6D4',m:['Task management','Project tracking','Time logging'],d:'A demo productivity workspace that brings task management, project tracking and time logging into one interface.'},
+{id:6,k:'web',u:'https://claude.ai/artifact/6bVLLgAqx7XsGW5DTXkn4V',t:'HavenFix',o:'A demo booking flow for home services.',s:['Web App','Booking Flow','Responsive'],g:'#06B6D4,#6366F1',m:['Service booking','Customer flow','Mobile-ready'],d:'A demo booking flow for home services, where visitors can browse services and schedule a visit.'},
+{id:7,k:'web',u:'https://claude.ai/artifact/RGYNv3JXecG7ovNeJnH1tM',t:'Nexora Ops',o:'A demo operations dashboard built by Nexora.',s:['React','Tailwind CSS','Dashboard'],g:'#6366F1,#8B5CF6',m:['React front end','Dashboard UI','Dark theme'],d:'A demo operations dashboard built by Nexora with React and Tailwind CSS.'},
+{id:8,k:'site',u:'https://claude.ai/artifact/T9VpTkgMBQrkj4FAZnfbvN',t:'Studio Monolith',o:'A concept website for an architecture and interior design studio.',s:['Website','Tailwind CSS','Responsive'],g:'#8C8275,#EFECE6',m:['Editorial layout','Portfolio showcase','Natural palette'],d:'A concept website for an architecture and interior design studio, with a calm editorial layout that lets the work lead.'},
+{id:9,k:'site',u:'https://claude.ai/artifact/NBwa9k6WFtxKVWsj43piL1',t:'The Ember House',o:'A concept website for an open-fire restaurant.',s:['Website','Tailwind CSS','Responsive'],g:'#C87D55,#8C8278',m:['Menu showcase','Warm brand identity','Mobile-ready'],d:'A concept website for an open-fire restaurant, with a warm, atmospheric design that puts the menu first.'}];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>s.replace(/&/g,'&amp;');
+function pv(p){const [a,b]=p.g.split(',');const mob=p.k==='mobile';
+return `<div class="relative h-52 overflow-hidden" style="background:linear-gradient(135deg,${a}33,${b}22),#0F0F12"><div class="pv absolute inset-0 grid place-items-center">`+
+(p.k==='site'?`<div class="w-4/5 rounded-xl border border-zinc-700 bg-zinc-950 p-3"><div class="flex gap-1.5"><i class="h-2 w-2 rounded-full bg-zinc-700"></i><i class="h-2 w-2 rounded-full bg-zinc-700"></i></div><i class="mt-3 block h-14 rounded-lg" style="background:linear-gradient(135deg,${a},${b})"></i><i class="mt-2 block h-2 w-3/4 rounded bg-zinc-700"></i><div class="mt-2 grid grid-cols-3 gap-2"><i class="h-8 rounded bg-zinc-800"></i><i class="h-8 rounded bg-zinc-800"></i><i class="h-8 rounded bg-zinc-800"></i></div></div>`:mob?`<div class="flex gap-3"><div class="h-40 w-24 rounded-2xl border border-zinc-700 bg-zinc-950 p-2"><i class="block h-3 w-10 rounded" style="background:${a}"></i><i class="mt-2 block h-14 rounded-lg" style="background:linear-gradient(135deg,${a},${b})"></i><i class="mt-2 block h-2 rounded bg-zinc-800"></i><i class="mt-1.5 block h-2 w-2/3 rounded bg-zinc-800"></i></div><div class="mt-6 h-40 w-24 rounded-2xl border border-zinc-700 bg-zinc-950 p-2"><i class="block h-2 w-8 rounded bg-zinc-700"></i><i class="mt-3 block h-16 w-16 mx-auto rounded-full border-4" style="border-color:${b}"></i><i class="mt-3 block h-2 rounded bg-zinc-800"></i></div></div>`
+:`<div class="w-4/5 rounded-xl border border-zinc-700 bg-zinc-950 p-3"><div class="flex gap-1.5"><i class="h-2 w-2 rounded-full bg-zinc-700"></i><i class="h-2 w-2 rounded-full bg-zinc-700"></i></div><div class="mt-3 flex h-24 items-end gap-2">${[40,65,50,85,60,95].map(h=>`<i class="flex-1 rounded-t" style="height:${h}%;background:linear-gradient(${b},${a})"></i>`).join('')}</div></div>`)+`</div></div>`}
+function render(f){$('#grid').innerHTML=P.filter(p=>f==='all'||p.k===f).map(p=>`<article class="glass card overflow-hidden rounded-2xl">${pv(p)}<div class="p-6"><div class="mono mb-2 text-xs text-zinc-500">${p.u?'<span class="mr-2 text-emerald-400">● Live demo</span>':''}${({web:'Web app',mobile:'Mobile app',site:'Website'})[p.k]}</div><h3 class="text-xl font-bold">${esc(p.t)}</h3><p class="mt-2 text-zinc-400">${p.o}</p><div class="mt-4 flex flex-wrap gap-2">${p.s.map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="mt-5 flex flex-wrap gap-2"><button class="btn btn-g !py-2 text-sm" data-open="${p.id}">${p.u?'Details':'View Case Study'}</button>${p.u?`<a class="btn btn-p !py-2 text-sm" href="${p.u}" target="_blank" rel="noopener noreferrer">View live ↗</a>`:''}</div></div></article>`).join('')}
+render('all');
+$$('.fbtn').forEach(b=>b.onclick=()=>{$$('.fbtn').forEach(x=>x.setAttribute('aria-pressed',x===b));render(b.dataset.f)});
+$('#grid').addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;const p=P.find(x=>x.id==b.dataset.open);
+$('#dc').innerHTML=`${pv(p)}<div class="p-7"><div class="flex items-start justify-between gap-4"><h3 id="dt" class="text-2xl font-extrabold">${esc(p.t)}</h3><button class="btn btn-g !p-2" id="x" aria-label="Close case study"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><p class="mt-3 text-zinc-300">${p.o}</p><p class="mt-3 text-zinc-400">${esc(p.d)}</p><div class="mono mt-5 grid gap-2 sm:grid-cols-3">${p.m.map(x=>`<div class="rounded-lg border border-zinc-800 bg-zinc-900/60 p-3 text-xs text-cyan-300">${x}</div>`).join('')}</div><div class="mt-5 flex flex-wrap gap-2">${p.s.map(x=>`<span class="tag">${x}</span>`).join('')}</div>${p.u?`<a href="${p.u}" target="_blank" rel="noopener noreferrer" class="btn btn-p mt-6 mr-2">View live project ↗</a>`:''}<a href="#contact" id="cta" class="btn ${p.u?'btn-g':'btn-p'} mt-6">Start a similar project</a></div>`;
+$('#dlg').showModal();$('#x').onclick=()=>$('#dlg').close();$('#cta').onclick=()=>$('#dlg').close()});
+$('#dlg').addEventListener('click',e=>{if(e.target.id==='dlg')e.target.close()});
+// nav
+$('#burger').onclick=()=>{const m=$('#mob'),o=m.classList.toggle('hidden');$('#burger').setAttribute('aria-expanded',!o)};
+$$('#mob a').forEach(a=>a.onclick=()=>{$('#mob').classList.add('hidden');$('#burger').setAttribute('aria-expanded','false')});
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('.rv').forEach(el=>io.observe(el));
+// counters
+$$('[data-count]').forEach(el=>{const to=+el.dataset.count;let t0;const step=t=>{t0??=t;const k=Math.min((t-t0)/1200,1);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)});
+// hero tilt
+const st=$('#stage'),tl=$('#tilt');
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){st.addEventListener('mousemove',e=>{const r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;tl.style.transform=`rotateY(${x*14}deg) rotateX(${-y*12}deg)`});st.addEventListener('mouseleave',()=>tl.style.transform='')}
+// copy
+$('#copy').onclick=async()=>{const b=$('#copy'),v='nexorapixel1@gmail.com';let ok=false;try{await navigator.clipboard.writeText(v);ok=true}catch(_){try{const t=document.createElement('textarea');t.value=v;document.body.appendChild(t);t.select();ok=document.execCommand('copy');t.remove()}catch(_){}}
+b.textContent=ok?'Copied!':'Press Ctrl+C to copy';setTimeout(()=>b.textContent='Copy email',2000)};
+// form
+const f=$('#form');
+f.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(f),n=d.get('name').trim(),m=d.get('email').trim(),b=d.get('brief').trim();
+if(!n||!/^\S+@\S+\.\S+$/.test(m)||!b){$('#err').classList.remove('hidden');return}
+$('#err').classList.add('hidden');
+const href='mailto:nexorapixel1@gmail.com?subject='+encodeURIComponent('Project brief from '+n)+'&body='+encodeURIComponent('Name: '+n+'\nEmail: '+m+'\nProject type: '+d.get('type')+'\nBudget: '+d.get('budget')+'\n\nBrief:\n'+b);
+$('#mlink').href=href;$('#who').textContent=n.split(' ')[0];f.classList.add('hidden');$('#ok').classList.remove('hidden');$('#ok').focus();window.location.href=href});
+$('#again').onclick=()=>{f.reset();$('#ok').classList.add('hidden');f.classList.remove('hidden')};
+</script>
+</body>
+</html>
